@@ -40,5 +40,7 @@ Avoiding the install makes the whole thing more portable and also allows tweakin
 If doing an install of the PSF packages themselves is desired there is a pip install script included which will also installed the dependency packages (if using Conda, it's much better to install the dependencies manually as described above; see https://www.anaconda.com/blog/using-pip-in-a-conda-environment)
 
 To run it, move to the SHARPESST (all caps) subdirectory/folder and type:
+
 	pip install -e .
- Note that the trailing period is part of the command!
+
+Note that the trailing period is part of the command!
