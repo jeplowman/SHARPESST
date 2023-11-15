@@ -41,3 +41,4 @@ If doing an install of the PSF packages themselves is desired there is a pip ins
 
 To run it, move to the SHARPESST (all caps) subdirectory/folder and type:
 	pip install -e .
+ Note that the trailing period is part of the command!
