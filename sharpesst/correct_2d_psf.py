@@ -242,7 +242,7 @@ def correct_spice_fits(input_file, output_file, fwhm_core0_yl=np.array([2.0, 1.0
 		psf_yl_angle=-15*np.pi/180, wing_weight=0.165, fwhm_symm=None, pxsz_mu=18, arcsperpx=1.1, angsperpx=0.09, 
 		spice_bin_facs = np.array([1.0,1.0,1.0]), super_fac=2, yl_core_xpo=2, yl_wing_xpo=1, src_pad=0, 
 		det_subgrid_fac=3, det_subgrid_fac_wings=1,	src_subgrid_fac=2, psf_thold_core=0.0025, psf_thold_wing=0.025,
-		stencil_footprint=[400,1200], spice_err_fac=0.2, spice_mask=None, spice_err=None):
+		stencil_footprint=[400,1200], spice_err_fac=0.2, spice_mask=None, spice_err=None, subtract_min=False):
 		
 	hdul = fits.open(input_file)
 	nraster = len(hdul)-1 # Last entry of hdul appears to contain variable_keywords...
@@ -251,6 +251,10 @@ def correct_spice_fits(input_file, output_file, fwhm_core0_yl=np.array([2.0, 1.0
 		hdul = fits.open(input_file)
 		spice_dat, spice_hdr = copy.deepcopy(hdul[i].data[0]), copy.deepcopy(hdul[i].header)
 		hdul.close()
+		if(subtract_min):
+			specmin = np.nanmin(spice_dat,axis=2)
+			nl = spice_dat.shape[2]
+			for i in range(0,nl): spice_dat[:,:,i] -= specmin
 		spice_dat = spice_dat.transpose([2,1,0]).astype(np.float32)
 		spice_corr_dat=spice_dat
 		spice_corr_dat, spice_corr_chi2s, metadict = correct_spice_raster(spice_dat,spice_hdr,fwhm_core0_yl,fwhm_wing0_yl,psf_yl_angle,wing_weight)
