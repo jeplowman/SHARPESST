@@ -254,7 +254,7 @@ def correct_spice_fits(input_file, output_file, fwhm_core0_yl=np.array([2.0, 1.0
 		if(subtract_min):
 			specmin = np.nanmin(spice_dat,axis=2)
 			nl = spice_dat.shape[2]
-			for i in range(0,nl): spice_dat[:,:,i] -= specmin
+			for j in range(0,nl): spice_dat[:,:,j] -= specmin
 		spice_dat = spice_dat.transpose([2,1,0]).astype(np.float32)
 		spice_corr_dat=spice_dat
 		spice_corr_dat, spice_corr_chi2s, metadict = correct_spice_raster(spice_dat,spice_hdr,fwhm_core0_yl,fwhm_wing0_yl,psf_yl_angle,wing_weight)
