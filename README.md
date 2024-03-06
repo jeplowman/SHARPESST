@@ -10,9 +10,12 @@ A standard set of Python packages will be needed. These should include jupyter, 
 	https://github.com/conda-forge/miniforge/#download
 
 After installing miniforge, to create a Python environment with the required Python packages, type the following commands:
+
 	conda create -n sharpesst
-	conda activate sharpesst
-	conda install jupyter numpy numba matplotlib scipy astropy
+
+ 	conda activate sharpesst
+
+ 	conda install jupyter numpy numba matplotlib scipy astropy
 
 It will probably take a while for it to determine all of the dependencies, but once it does, answer 'y' to finish the installation. You should then be good to start Jupyter in a command line terminal from the top directory of the repo:
 	jupyter notebook --no-browser
